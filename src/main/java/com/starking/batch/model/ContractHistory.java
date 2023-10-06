@@ -10,6 +10,6 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-public class Contact {
+public class ContractHistory {
 
 }
