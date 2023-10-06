@@ -18,4 +18,13 @@ import lombok.Setter;
 @Getter
 public class ContractHistory {
 
+	@Id
+	@GeneratedValue(generator = "uuid2")
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	private String contractId;
+	private String holderName;
+	private int duration;
+	private double amount;
+	private Date creationDate;
+	private String status;
 }
