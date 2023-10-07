@@ -13,10 +13,11 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
+@SuppressWarnings("removal")
 public class BatchConfigurer  extends DefaultBatchConfiguration {
 	
 	@Bean
-	public Job startBatch(JobBuilderFactory jobBuilderFactory, Step step1) {
+	public Job startBatch( JobBuilderFactory jobBuilderFactory, Step step1) {
 		return jobBuilderFactory.get("contractEffective")
 				.incrementer(new RunIdIncrementer())
 				.start(step1)
