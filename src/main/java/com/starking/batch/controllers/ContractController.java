@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,7 @@ import com.starking.batch.model.Contract;
 import com.starking.batch.repositories.ContractRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 
 /**
  * @author pedroRhamon
@@ -49,6 +52,18 @@ public class ContractController {
 		}
 		this.contractRepository.saveAll(contractList);
 		return "saved successfully";
+	}
+
+	@GetMapping("/start-batch")
+	@SneakyThrows
+	public String startBatch() {
+
+		JobParameters jobParameter = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
+				.toJobParameters();
+
+		this.jobLauncher.run(job, jobParameter);
+
+		return "batch started...";
 	}
 
 }
