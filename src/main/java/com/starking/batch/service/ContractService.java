@@ -1,4 +1,4 @@
-package com.starking.batch;
+package com.starking.batch.service;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.launch.JobLauncher;
