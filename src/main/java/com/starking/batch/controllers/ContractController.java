@@ -25,30 +25,30 @@ import lombok.RequiredArgsConstructor;
 public class ContractController {
 
 	private final ContractRepository contractRepository;
-	
+
 	private final JobLauncher jobLauncher;
-	
+
 	private final Job job;
-	
-	 @GetMapping("/insert")
-	    public String saveDummyData() {
-	        List<Contract> contractList = new ArrayList<>();
-	        for (int i = 0; i < 10000; i++) {
-	            Contract contract = new Contract();
-	            contract.setHolderName("name-" + i);
-	            contract.setDuration(new Random().nextInt());
-	            contract.setAmount(new Random().nextInt(500000));
-	            Calendar calendar = Calendar.getInstance();
-	            calendar.set(Calendar.YEAR, new Random().nextInt(2020));
-	            calendar.set(Calendar.MONTH, new Random().nextInt(12));
-	            calendar.set(Calendar.DAY_OF_MONTH, new Random().nextInt(30) + 1);
-	            Date startDate = calendar.getTime();
-	            contract.setCreationDate(startDate);
-	            contract.setStatus("InProgress");
-	            contractList.add(contract);
-	        }
-	        this.contractRepository.saveAll(contractList);
-	        return "saved successfully";
-	    }
-	
+
+	@GetMapping("/insert")
+	public String saveDummyData() {
+		List<Contract> contractList = new ArrayList<>();
+		for (int i = 0; i < 10000; i++) {
+			Contract contract = new Contract();
+			contract.setHolderName("name-" + i);
+			contract.setDuration(new Random().nextInt());
+			contract.setAmount(new Random().nextInt(500000));
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.YEAR, new Random().nextInt(2020));
+			calendar.set(Calendar.MONTH, new Random().nextInt(12));
+			calendar.set(Calendar.DAY_OF_MONTH, new Random().nextInt(30) + 1);
+			Date startDate = calendar.getTime();
+			contract.setCreationDate(startDate);
+			contract.setStatus("InProgress");
+			contractList.add(contract);
+		}
+		this.contractRepository.saveAll(contractList);
+		return "saved successfully";
+	}
+
 }
