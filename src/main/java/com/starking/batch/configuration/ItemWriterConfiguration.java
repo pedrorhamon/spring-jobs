@@ -1,9 +1,8 @@
 package com.starking.batch.configuration;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.springframework.batch.item.Chunk;
+import org.springframework.batch.core.step.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
@@ -33,7 +32,7 @@ public class ItemWriterConfiguration {
 
 		JdbcBatchItemWriter<ContractHistory> itemWriter = new JdbcBatchItemWriter<ContractHistory>() {
 			@Override
-			public void write(Chunk<? extends ContractHistory> items) throws Exception {
+			public void write(List<? extends ContractHistory> items) throws Exception {
 				super.write(items);
 				log.info("item processed - " + items.size());
 				delete(items, jdbcTemplate);
@@ -50,7 +49,7 @@ public class ItemWriterConfiguration {
 		return itemWriter;
 	}
 
-	public void delete(final Chunk<? extends ContractHistory> chunk, NamedParameterJdbcTemplate jdbcTemplate) {
+	public void delete(final List<? extends ContractHistory> chunk, NamedParameterJdbcTemplate jdbcTemplate) {
 		final String DELETE_QUERY = "DELETE FROM CONTRACT WHERE contract_id IN (:contract_id)";
 		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 		parameterSource.addValue("contract_id", chunk);

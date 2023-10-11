@@ -10,13 +10,13 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.starking.batch.model.Contract;
 import com.starking.batch.repositories.ContractRepository;
 
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 
 /**
@@ -24,14 +24,16 @@ import lombok.SneakyThrows;
  */
 
 @RestController
-@RequiredArgsConstructor
 public class ContractController {
 
-	private final ContractRepository contractRepository;
+	@Autowired
+	private ContractRepository contractRepository;
 
-	private final JobLauncher jobLauncher;
+	@Autowired
+	private JobLauncher jobLauncher;
 
-	private final Job job;
+	@Autowired
+	private Job job;
 
 	@GetMapping("/insert")
 	public String saveDummyData() {

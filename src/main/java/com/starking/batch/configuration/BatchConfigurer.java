@@ -2,9 +2,9 @@ package com.starking.batch.configuration;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.configuration.support.DefaultBatchConfiguration;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
@@ -21,7 +21,7 @@ import com.starking.batch.model.ContractHistory;
 
 @Configuration
 @SuppressWarnings("removal")
-public class BatchConfigurer  extends DefaultBatchConfiguration {
+public class BatchConfigurer  extends DefaultBatchConfigurer {
 	
 	@Bean
 	public Job startBatch( JobBuilderFactory jobBuilderFactory, Step step1) {
